@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiments Analysis Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Analisis Sentimen</h1>
+            <h2>Hasil Keputusan Mahkamah Konstitusi</h2>
+        </header>
+        <div class="dashboard">
+            <div class="kpis">
+                <div class="rating">
+                    <h3>Total Seluruh Sentimen</h3>
+                    <p>1737 Sentimen</p>
+                </div>
+                <div class="average-price">
+                    <h3>Jumlah Data Setelah Cleaning Data</h3>
+                    <p>1327 Sentimen</p>
+                </div>
+                <div class="reviews">
+                    <h3>Rentang Pengumpulan Data</h3>
+                    <p>22 April 2024 - 13 May 2024</p>
+                </div>
+            </div>
+            <div class="charts">
+                <div class="chart">
+                    <canvas id="word-frequency"></canvas>
+                </div>
+                <div class="chart">
+                    <canvas id="review-classification"></canvas>
+                </div>
+                <div class="chart">
+                    <canvas id="barChart"></canvas>
+                </div>
+                <div class="chart">
+                    <canvas id="total-score-by-word"></canvas>
+                </div>
+                <div class="chart">
+                    <div id="word-cloud"></div>
+                    <img src="wordclouds_biru_pas.png" alt="Deskripsi gambar" id="image-element">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
