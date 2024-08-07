@@ -6,12 +6,15 @@
     <title>Sentiments Analysis Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>Analisis Sentimen</h1>
             <h2>Hasil Keputusan Mahkamah Konstitusi</h2>
+            <input type="text" id="search-input" placeholder="Search Sentiments...">
+
         </header>
         <div class="dashboard">
             <div class="kpis">
@@ -45,9 +48,26 @@
                     <div id="word-cloud"></div>
                     <img src="wordclouds_biru_pas.png" alt="Deskripsi gambar" id="image-element">
                 </div>
+                <div class="chart">
+                    <input type="file" id="csvFileInput" accept=".csv">
+                    <table id="csv-table">
+                        <thead>
+                            <tr>
+                                <th>Full Text</th>
+                                <th>Tweet English</th>
+                                <th>Klasifikasi Naive Bayes</th>
+                                <th>Tanggal Tweet</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
     <script src="scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script> 
 </body>
 </html>

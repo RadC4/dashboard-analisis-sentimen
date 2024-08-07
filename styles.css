@@ -15,6 +15,18 @@ body {
 header {
     text-align: center;
     margin-bottom: 20px;
+    position: relative;
+}
+
+#search-input {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 200px;
 }
 
 .filters {
@@ -67,4 +79,20 @@ header {
 .chart canvas {
     width: 100%;
     height: 100%;
+}
+
+#csv-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#csv-table th, #csv-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#csv-table th {
+    background-color: #f2f2f2;
 }

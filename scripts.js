@@ -84,6 +84,65 @@ document.addEventListener('DOMContentLoaded', function () {
             maintainAspectRatio: false
         }
     });
-
     document.getElementById('word-cloud').innerHTML = '<p>Visualisasi Cloudwords</p>';
+
+    //table sentiment
+    document.getElementById('csvFileInput').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            Papa.parse(file, {
+                header: true,
+                complete: function (results) {
+                    const data = results.data;
+                    const tableBody = document.querySelector('#csv-table tbody');
+
+                    function highlightText(text, searchTerm) {
+                        if (!searchTerm) return text;
+                        const regex = new RegExp(`(${searchTerm})`, 'gi');
+                        return text.replace(regex, '<span class="highlight">$1</span>');
+                    }
+
+                    function renderTableRows(data, searchTerm = '') {
+                        tableBody.innerHTML = '';
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+
+                            const fullTextTd = document.createElement('td');
+                            fullTextTd.innerHTML = highlightText(row.full_text || '', searchTerm);
+                            tr.appendChild(fullTextTd);
+
+                            const tweetEnglishTd = document.createElement('td');
+                            tweetEnglishTd.innerHTML = highlightText(row.tweet_english || '', searchTerm);
+                            tr.appendChild(tweetEnglishTd);
+
+                            const klasifikasiNaiveBayesTd = document.createElement('td');
+                            klasifikasiNaiveBayesTd.innerHTML = highlightText(row.klasifikasi_naive_bayes || '', searchTerm);
+                            tr.appendChild(klasifikasiNaiveBayesTd);
+
+                            const tanggalTweetTd = document.createElement('td');
+                            tanggalTweetTd.innerHTML = highlightText(row.tanggal_tweet || '', searchTerm);
+                            tr.appendChild(tanggalTweetTd);
+
+                            tableBody.appendChild(tr);
+                        });
+                    }
+
+                    renderTableRows(data);
+
+                    // Search Input Handling
+                    const searchInput = document.getElementById('search-input');
+                    searchInput.addEventListener('input', function (event) {
+                        const searchTerm = event.target.value.toLowerCase();
+                        const filteredData = data.filter(row => 
+                            (row.full_text && row.full_text.toLowerCase().includes(searchTerm)) ||
+                            (row.tweet_english && row.tweet_english.toLowerCase().includes(searchTerm)) ||
+                            (row.klasifikasi_naive_bayes && row.klasifikasi_naive_bayes.toLowerCase().includes(searchTerm)) ||
+                            (row.tanggal_tweet && row.tanggal_tweet.toLowerCase().includes(searchTerm))
+                        );
+                        renderTableRows(filteredData, searchTerm);
+                    });
+                }
+            });
+        }
+    });
 });
